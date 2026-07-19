@@ -663,6 +663,9 @@
         var inputEl = doc.getElementById('photoFileInput');
         if (inputEl) inputEl.remove();
 
+        var warningBar = doc.querySelector('.admin-warning-bar');
+        if (warningBar) warningBar.remove();
+
         if (isLocalServer) {
           fetch('/api/save-page', {
             method: 'POST',

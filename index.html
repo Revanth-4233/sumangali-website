@@ -2779,7 +2779,20 @@
           var wasEdit = document.body.classList.contains('edit-mode');
           document.body.classList.remove('edit-mode');
 
-          var htmlContent = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+          // Parse and clean DOM before saving
+          var rawHTML = document.documentElement.outerHTML;
+          var parser = new DOMParser();
+          var doc = parser.parseFromString(rawHTML, 'text/html');
+
+          // Strip dynamic UI warning bar
+          var warningBar = doc.querySelector('.admin-warning-bar');
+          if (warningBar) warningBar.remove();
+
+          // Strip dynamic file input
+          var inputEl = doc.getElementById('photoFileInput');
+          if (inputEl) inputEl.remove();
+
+          var htmlContent = '<!DOCTYPE html>\n' + doc.documentElement.outerHTML;
 
           if (wasEdit) document.body.classList.add('edit-mode');
 

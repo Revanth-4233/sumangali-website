@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ladies Wear Collection — Sumangali Garments</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --maroon-950:#2E0B10;
+    --maroon-900:#4A1620;
+    --maroon-800:#6B2431;
+    --gold-500:#C9A15A;
+    --gold-300:#E4CE9B;
+    --teal-700:#0F5257;
+    --teal-500:#17747B;
+    --ivory-100:#FBF7EF;
+    --ivory-200:#F3EBDA;
+    --ink-900:#241715;
+    --ink-600:#5A4B47;
+  }
+ 
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ivory-100);
+    color:var(--ink-900);
+    font-family:'Manrope', sans-serif;
+    line-height:1.5;
+    overflow-x:hidden;
+  }
+ 
+  h1,h2,h3,h4,.display{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+  }
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  .wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  /* ===== NAV ===== */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(251,247,239,0.9);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(74,22,32,0.12);
+  }
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 32px; max-width:1180px; margin:0 auto;
+  }
+  .brandmark{display:flex; align-items:center; gap:12px;}
+  .brandmark .ring{
+    width:44px; height:44px; border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, var(--maroon-800), var(--maroon-950));
+    border:1.5px solid var(--gold-500);
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+  }
+  .brandmark .ring svg{width:24px; height:24px;}
+  .brandname{font-family:'Fraunces', serif; font-weight:700; font-size:1.15rem; color:var(--maroon-950); letter-spacing:0.01em;}
+  .brandname span{display:block; font-family:'Manrope',sans-serif; font-weight:600; font-size:0.62rem; letter-spacing:0.16em; color:var(--teal-700); text-transform:uppercase; margin-top:1px;}
+ 
+  .navlinks{display:flex; gap:32px; font-size:0.92rem; font-weight:600; color:var(--ink-600); align-items:center;}
+  .navlinks a:hover{color:var(--maroon-900);}
+  .nav-cta{
+    background:var(--maroon-900); color:var(--ivory-100);
+    padding:10px 20px; border-radius:100px; font-weight:700; font-size:0.85rem;
+    display:flex; align-items:center; gap:8px;
+    transition:background 0.2s ease, transform 0.2s ease;
+  }
+  .nav-cta:hover{background:var(--maroon-950); transform:translateY(-1px);}
+  @media (max-width:820px){ .navlinks{display:none;} }
+
+  /* ===== MEGA MENU ===== */
+  .nav-dropdown{position:relative;}
+  .nav-drop-trigger{cursor:pointer; display:flex; align-items:center; gap:4px;}
+  .nav-drop-trigger::after{content:'\25BE'; font-size:0.65rem; transition:transform 0.2s ease;}
+  .nav-dropdown:hover .nav-drop-trigger::after{transform:rotate(180deg);}
+  .mega-menu{
+    position:absolute; top:calc(100% + 12px); left:50%; transform:translateX(-50%);
+    width:720px; background:var(--ivory-100);
+    border:1px solid rgba(74,22,32,0.1);
+    border-radius:16px;
+    box-shadow:0 24px 64px -16px rgba(46,11,16,0.2), 0 0 0 1px rgba(74,22,32,0.05);
+    opacity:0; visibility:hidden; pointer-events:none;
+    transition:opacity 0.3s ease, transform 0.3s ease;
+    transform:translateX(-50%) translateY(8px);
+    z-index:100; padding:32px;
+  }
+  .nav-dropdown:hover .mega-menu{
+    opacity:1; visibility:visible; pointer-events:auto;
+    transform:translateX(-50%) translateY(0);
+  }
+  .mega-menu::before{
+    content:''; position:absolute; top:-8px; left:50%;
+    width:16px; height:16px; background:var(--ivory-100); border-radius:3px;
+    border-top:1px solid rgba(74,22,32,0.1); border-left:1px solid rgba(74,22,32,0.1);
+    transform:translateX(-50%) rotate(45deg);
+  }
+  .mega-menu-inner{display:grid; grid-template-columns:repeat(4,1fr); gap:28px;}
+  .mega-col h4{
+    font-family:'Fraunces',serif; font-size:0.92rem; color:var(--maroon-950);
+    margin-bottom:14px; padding-bottom:10px;
+    border-bottom:2px solid var(--gold-500); letter-spacing:0.02em;
+  }
+  .mega-col a{
+    display:block; font-size:0.82rem; color:var(--ink-600); padding:5px 0;
+    transition:color 0.15s ease, padding-left 0.15s ease; font-weight:500;
+  }
+  .mega-col a:hover{color:var(--maroon-900); padding-left:8px;}
+  @media(max-width:900px){
+    .mega-menu{width:calc(100vw - 32px); left:16px; transform:translateX(0) translateY(8px); border-radius:12px;}
+    .nav-dropdown:hover .mega-menu{transform:translateX(0) translateY(0);}
+    .mega-menu-inner{grid-template-columns:repeat(2,1fr); gap:20px;}
+    .mega-menu::before{display:none;}
+  }
+
+  /* ===== CATEGORY HERO ===== */
+  .category-hero{
+    background:linear-gradient(135deg, var(--maroon-950) 0%, var(--maroon-900) 100%);
+    color:var(--ivory-100); padding:64px 32px; text-align:center; position:relative;
+    border-bottom:1.5px solid var(--gold-500);
+  }
+  .category-hero h1{font-size:clamp(2rem, 4vw, 3rem); margin-bottom:12px;}
+  .category-hero p{color:var(--gold-300); font-size:1.05rem; max-width:600px; margin:0 auto;}
+
+  /* ===== PRODUCTS LAYOUT ===== */
+  .shop-container{
+    display:grid; grid-template-columns:250px 1fr; gap:36px; padding:48px 0;
+  }
+  @media(max-width:850px){
+    .shop-container{grid-template-columns:1fr;}
+  }
+
+  /* Filters */
+  .filters-pane{
+    background:var(--ivory-200); border-radius:20px; padding:28px;
+    border:1px solid rgba(74,22,32,0.08); height:fit-content;
+    position:sticky; top:100px;
+  }
+  .filter-group{margin-bottom:24px;}
+  .filter-group h3{font-size:1rem; color:var(--maroon-950); margin-bottom:14px; border-bottom:1px solid rgba(74,22,32,0.1); padding-bottom:6px;}
+  .filter-option{display:flex; align-items:center; gap:10px; margin-bottom:8px; font-size:0.88rem; color:var(--ink-600); cursor:pointer;}
+  .filter-option input{accent-color:var(--maroon-900); width:16px; height:16px;}
+  
+  /* Products Grid */
+  .products-grid{
+    display:grid; grid-template-columns:repeat(2, 1fr); gap:24px;
+  }
+  @media(max-width:600px){.products-grid{grid-template-columns:1fr;}}
+
+  .product-card{
+    background:var(--ivory-200); border-radius:18px; overflow:hidden;
+    box-shadow:0 6px 20px -8px rgba(46,11,16,0.15);
+    transition:transform 0.35s ease, box-shadow 0.35s ease;
+    border:1px solid rgba(74,22,32,0.06); display:flex; flex-direction:column;
+  }
+  .product-card:hover{transform:translateY(-6px); box-shadow:0 18px 36px -12px rgba(46,11,16,0.25);}
+  .product-img{height:300px; position:relative; overflow:hidden; background:#eee;}
+  .product-img img{width:100%; height:100%; object-fit:cover;}
+  .product-badge{
+    position:absolute; top:12px; right:12px;
+    background:var(--gold-500); color:var(--maroon-950);
+    padding:4px 10px; border-radius:100px; font-size:0.65rem; font-weight:800;
+  }
+  .product-info{padding:18px; flex:1; display:flex; flex-direction:column;}
+  .product-info h3{font-size:1.05rem; color:var(--maroon-950); margin-bottom:6px;}
+  .product-info .desc{font-size:0.82rem; color:var(--ink-600); margin-bottom:12px; flex:1;}
+  .product-price{font-size:1.15rem; font-weight:800; color:var(--maroon-900); display:flex; align-items:center; gap:8px;}
+  .product-price span{font-size:0.85rem; text-decoration:line-through; color:var(--ink-600); font-weight:500;}
+  
+  .whatsapp-btn{
+    margin-top:16px; background:#1ea952; color:#fff; display:flex; align-items:center; justify-content:center;
+    gap:8px; padding:12px; border-radius:12px; font-size:0.9rem; font-weight:700;
+    transition:background 0.2s ease, transform 0.2s ease; border:none; cursor:pointer; width:100%;
+  }
+  .whatsapp-btn:hover{background:#178b3f; transform:translateY(-2px);}
+  .whatsapp-btn svg{width:18px; height:18px; fill:currentColor;}
+
+  /* ===== FOOTER ===== */
+  footer{background:var(--maroon-950); color:rgba(251,247,239,0.6); padding:56px 0 28px; margin-top:64px;}
+  .foot-top{display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:32px; padding-bottom:36px; border-bottom:1px solid rgba(251,247,239,0.12);}
+  .foot-brand{display:flex; align-items:center; gap:12px;}
+  .foot-brand .brandname{color:var(--ivory-100);}
+  /* ===== EDIT BADGE FOR PRODUCT CARDS ===== */
+  .product-img{position:relative;}
+  .edit-badge{
+    position:absolute; top:12px; left:12px;
+    width:36px; height:36px; border-radius:50%;
+    background:var(--maroon-900); border:1px solid var(--gold-500);
+    display:none; align-items:center; justify-content:center;
+    cursor:pointer; z-index:10; transition:transform 0.2s ease;
+  }
+  .edit-badge svg{width:16px; height:16px; stroke:var(--ivory-100);}
+  body.edit-mode .edit-badge{display:flex;}
+  body.edit-mode .edit-badge:hover{transform:scale(1.1); background:var(--maroon-950);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="brandmark" onclick="window.location.href='index.html'" style="cursor:pointer;">
+      <div class="ring">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 3c2 2 2 4 0 6-2-2-2-4 0-6Z" fill="#E4CE9B"/><path d="M12 21c-5-2-8-6-8-10 3 1 6 3 8 6 2-3 5-5 8-6 0 4-3 8-8 10Z" stroke="#E4CE9B" stroke-width="1.1"/></svg>
+      </div>
+      <div class="brandname">Sumangali<span>Family Shopping Mall</span></div>
+    </div>
+    <nav class="navlinks">
+      <a href="index.html">Home</a>
+      <div class="nav-dropdown">
+        <a href="#categories" class="nav-drop-trigger">Collections</a>
+        <div class="mega-menu">
+          <div class="mega-menu-inner">
+            <div class="mega-col">
+              <h4>Baby Wear</h4>
+              <a href="baby.html">Baby Girl</a>
+              <a href="baby.html">Baby Boy</a>
+              <a href="baby.html">Newborn Essentials</a>
+              <a href="baby.html">Festive Baby Wear</a>
+            </div>
+            <div class="mega-col">
+              <h4>Kids Wear</h4>
+              <a href="kids.html">Boys Clothing</a>
+              <a href="kids.html">Girls Clothing</a>
+              <a href="kids.html">School Uniforms</a>
+              <a href="kids.html">Party Wear</a>
+            </div>
+            <div class="mega-col">
+              <h4>Men's Wear</h4>
+              <a href="men.html">Casual Shirts</a>
+              <a href="men.html">Formal Wear</a>
+              <a href="men.html">Ethnic Kurtas</a>
+              <a href="men.html">T-Shirts</a>
+            </div>
+            <div class="mega-col">
+              <h4>Ladies Wear</h4>
+              <a href="women.html">Sarees</a>
+              <a href="women.html">Kurtis &amp; Tops</a>
+              <a href="women.html">Salwar Sets</a>
+              <a href="women.html">A-1 Models</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a href="index.html#story">Our Story</a>
+      <a href="index.html#gallery">Gallery</a>
+      <a href="index.html#visit">Visit Us</a>
+    </nav>
+    <a class="nav-cta" href="https://instagram.com/sumangali_garments_2000" target="_blank" rel="noopener">
+      Visit on Instagram
+    </a>
+  </div>
+</header>
+
+<section class="category-hero">
+  <h1>Ladies Wear Collection</h1>
+  <p>Explore gorgeous traditional Banarasi silk sarees, daily wear kurtis, designer suit sets, and western wear.</p>
+</section>
+
+<div class="wrap">
+  <div class="shop-container">
+    <aside class="filters-pane">
+      <div class="filter-group">
+        <h3>Categories</h3>
+        <label class="filter-option"><input type="checkbox" checked value="all" id="filter-all"> All Ladies Wear</label>
+        <label class="filter-option"><input type="checkbox" value="saree" class="cat-filter"> Sarees</label>
+        <label class="filter-option"><input type="checkbox" value="kurtis" class="cat-filter"> Kurtis &amp; Suits</label>
+        <label class="filter-option"><input type="checkbox" value="lehenga" class="cat-filter"> Lehengas</label>
+        <label class="filter-option"><input type="checkbox" value="salwar" class="cat-filter"> Salwar Sets</label>
+        <label class="filter-option"><input type="checkbox" value="western" class="cat-filter"> Western Wear</label>
+      </div>
+    </aside>
+
+    <main>
+      <div class="products-grid" id="productsGrid">
+        
+        <!-- Product 1 -->
+        <div class="product-card" data-category="saree" data-price="1299">
+          <div class="product-img">
+            <img src="images/product_women_1.png" alt="Ladies Saree" id="photo-women-1">
+            <div class="edit-badge" data-target="photo-women-1" title="Change photo">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1Z"/><circle cx="12" cy="13" r="3.5"/></svg>
+            </div>
+            <span class="product-badge">Top Trend</span>
+          </div>
+          <div class="product-info">
+            <h3>Exquisite Banarasi Silk Saree</h3>
+            <p class="desc">Vibrant red &amp; gold Banarasi silk saree with detailed handwoven border. Perfect for weddings.</p>
+            <button class="whatsapp-btn" onclick="orderProduct('Exquisite Banarasi Silk Saree')">
+              <svg viewBox="0 0 24 24"><path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984a9.96 9.96 0 0 0 1.335 4.963L2 22l5.233-1.372a9.948 9.948 0 0 0 4.779 1.214h.005c5.505 0 9.988-4.478 9.989-9.984A9.98 9.98 0 0 0 12.012 2Zm4.912 14.157c-.252.712-1.46 1.306-2.028 1.417-.508.101-1.17.108-1.854-.108-.431-.137-.98-.31-1.67-.61-2.934-1.272-4.832-4.246-4.978-4.444-.146-.197-1.17-1.554-1.17-2.968s.772-2.11 1.077-2.417c.27-.27.585-.373.795-.373h.594c.196 0 .463.007.69.513.29.691.867 2.124.94 2.274.072.15.072.316-.01.481-.082.165-.195.345-.377.556l-.508.577c-.183.21-.303.42-.07.781.233.361.91 1.498 1.947 2.42 1.335 1.189 2.457 1.556 2.898 1.737.33.135.524.113.72-.113.195-.226.863-.999 1.096-1.405.233-.406.465-.33.795-.21.33.12 2.088.984 2.42 1.15.33.165.55.247.63.39.082.143.082.827-.17 1.539Z"/></svg>
+              Buy on WhatsApp
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <div class="ring" style="width:38px;height:38px;">
+          <svg viewBox="0 0 24 24" fill="none" style="width:20px;height:20px;"><path d="M12 3c2 2 2 4 0 6-2-2-2-4 0-6Z" fill="#E4CE9B"/><path d="M12 21c-5-2-8-6-8-10 3 1 6 3 8 6 2-3 5-5 8-6 0 4-3 8-8 10Z" stroke="#E4CE9B" stroke-width="1"/></svg>
+        </div>
+        <div class="brandname">Sumangali<span>Family Shopping Mall</span></div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Sumangali Garments. All rights reserved.</span>
+      <span>Kids Wear · Men's Wear · Ladies Wear · Baby Wear</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function orderProduct(name) {
+    var text = "Hi Sumangali Garments, I would like to order: " + name;
+    var url = "https://wa.me/919849860670?text=" + encodeURIComponent(text);
+    window.open(url, '_blank');
+  }
+
+  // Zero-Config Visual CMS & Add Product Engine for Category Pages
+  (function(){
+    var params = new URLSearchParams(window.location.search);
+    var isEditMode = params.has('edit') || window.location.hash === '#edit' || localStorage.getItem('editMode') === 'true';
+
+    if (isEditMode) {
+      document.body.classList.add('edit-mode');
+      // Inject floating admin warning bar at top of page in edit mode
+      var adminBar = document.createElement('div');
+      adminBar.className = 'admin-warning-bar';
+      adminBar.style.background = 'var(--maroon-900)';
+      adminBar.style.color = 'var(--ivory-100)';
+      adminBar.style.padding = '12px';
+      adminBar.style.textAlign = 'center';
+      adminBar.style.fontSize = '0.9rem';
+      adminBar.style.fontFamily = 'sans-serif';
+      adminBar.style.zIndex = '99999';
+      adminBar.style.position = 'relative';
+      adminBar.style.borderBottom = '1.5px solid var(--gold-500)';
+      adminBar.innerHTML = '⚠️ <strong>Admin Edit Mode Active</strong> · Click any text or upload badges to make live edits · <a href="#" id="adminExitLink" style="color:var(--gold-300); margin-left:15px; text-decoration:underline; font-weight:bold;">Exit Admin Mode</a>';
+      document.body.insertBefore(adminBar, document.body.firstChild);
+      
+      document.getElementById('adminExitLink').addEventListener('click', function(e) {
+        e.preventDefault();
+        localStorage.removeItem('editMode');
+        window.location.reload();
+      });
+      // 1. Inject hidden file input for photo uploads
+      var fileInput = document.getElementById('photoFileInput');
+      if(!fileInput){
+        fileInput = document.createElement('input');
+        fileInput.type = 'file';
+        fileInput.id = 'photoFileInput';
+        fileInput.accept = 'image/*';
+        fileInput.style.display = 'none';
+        document.body.appendChild(fileInput);
+      }
+
+      var currentTargetImg = null;
+
+      function bindEditBadges() {
+        document.querySelectorAll('.edit-badge').forEach(function(badge) {
+          // Clone to prevent double event listeners
+          var newBadge = badge.cloneNode(true);
+          badge.parentNode.replaceChild(newBadge, badge);
+          
+          newBadge.addEventListener('click', function(e) {
+            e.stopPropagation();
+            var targetId = newBadge.dataset.target;
+            currentTargetImg = document.getElementById(targetId);
+            fileInput.click();
+          });
+        });
+      }
+
+      // Handle raw file upload callback
+      fileInput.addEventListener('change', function() {
+        var file = this.files && this.files[0];
+        if(!file || !currentTargetImg) return;
+
+        currentTargetImg.style.opacity = '0.5';
+        var filename = currentTargetImg.id + '_' + file.name.replace(/[^a-zA-Z0-9.-]/g, '_');
+
+        fetch('/api/upload?filename=' + encodeURIComponent(filename), {
+          method: 'POST',
+          headers: {
+            'Content-Type': file.type,
+            'X-Filename': filename
+          },
+          body: file
+        })
+        .then(function(res) { return res.json(); })
+        .then(function(data) {
+          currentTargetImg.style.opacity = '1';
+          if (data.success) {
+            currentTargetImg.src = '/' + data.url;
+            currentTargetImg.classList.add('has-photo');
+          } else {
+            alert('Upload failed: ' + data.error);
+          }
+        })
+        .catch(function(err) {
+          currentTargetImg.style.opacity = '1';
+          alert('Upload failed: ' + err.message);
+        });
+      });
+
+      // Initialize edit badges
+      bindEditBadges();
+
+      // 2. Make product cards text contenteditable (Name and Description only)
+      document.querySelectorAll('.product-card h3, .product-card .desc').forEach(function(el) {
+        el.setAttribute('contenteditable', 'true');
+        el.style.border = '1px dashed var(--gold-500)';
+        el.style.padding = '4px';
+        el.style.borderRadius = '6px';
+        el.style.outline = 'none';
+        el.style.background = 'rgba(201, 161, 90, 0.05)';
+      });
+
+      // 3. Inject "+ Add New Product" button at grid header
+      var grid = document.getElementById('productsGrid');
+      if (grid) {
+        var addBtn = document.createElement('button');
+        addBtn.className = 'whatsapp-btn';
+        addBtn.style.background = 'var(--maroon-900)';
+        addBtn.style.color = 'var(--ivory-100)';
+        addBtn.style.marginBottom = '24px';
+        addBtn.style.gridColumn = '1 / -1';
+        addBtn.style.maxWidth = '250px';
+        addBtn.innerHTML = '➕ Add New Product';
+        addBtn.addEventListener('click', function() {
+          var timestamp = Date.now();
+          var card = document.createElement('div');
+          card.className = 'product-card';
+          card.setAttribute('data-category', 'all');
+          card.innerHTML = `
+            <div class="product-img">
+              <img src="images/product_women_1.png" alt="New Product" id="img-${timestamp}">
+              <div class="edit-badge" data-target="img-${timestamp}" title="Change photo">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1Z"/><circle cx="12" cy="13" r="3.5"/></svg>
+              </div>
+              <span class="product-badge">New</span>
+            </div>
+            <div class="product-info">
+              <h3 contenteditable="true" style="border: 1px dashed var(--gold-500); padding: 4px; border-radius: 6px; outline: none; background: rgba(201, 161, 90, 0.05);">New Product Name</h3>
+              <p class="desc" contenteditable="true" style="border: 1px dashed var(--gold-500); padding: 4px; border-radius: 6px; outline: none; background: rgba(201, 161, 90, 0.05);">Product Description</p>
+              <button class="whatsapp-btn" onclick="orderProduct('New Product Name')">
+                Buy on WhatsApp
+              </button>
+            </div>
+          `;
+          grid.appendChild(card);
+          bindEditBadges();
+        });
+        grid.parentNode.insertBefore(addBtn, grid);
+      }
+
+      // 4. Inject Float Save Button
+      var saveBtn = document.createElement('button');
+      saveBtn.className = 'save-float';
+      saveBtn.style.display = 'flex';
+      saveBtn.style.position = 'fixed';
+      saveBtn.style.bottom = '26px';
+      saveBtn.style.left = '26px';
+      saveBtn.style.zIndex = '100';
+      saveBtn.style.background = 'var(--maroon-900)';
+      saveBtn.style.color = 'var(--ivory-100)';
+      saveBtn.style.padding = '14px 22px';
+      saveBtn.style.borderRadius = '100px';
+      saveBtn.style.border = 'none';
+      saveBtn.style.cursor = 'pointer';
+      saveBtn.style.boxShadow = '0 10px 26px -8px rgba(46,11,16,0.6)';
+      saveBtn.style.alignItems = 'center';
+      saveBtn.style.gap = '8px';
+      saveBtn.innerHTML = `
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+        <span>Save Category Page</span>
+      `;
+
+      saveBtn.addEventListener('click', function() {
+        saveBtn.style.background = 'var(--teal-700)';
+        saveBtn.querySelector('span').textContent = 'Saving...';
+
+        var pathArr = window.location.pathname.split('/');
+        var filename = pathArr[pathArr.length - 1] || 'women.html';
+
+        var cleanHTML = document.documentElement.outerHTML;
+        var parser = new DOMParser();
+        var doc = parser.parseFromString(cleanHTML, 'text/html');
+
+        // Cleanup editable classes/attributes before saving
+        doc.querySelectorAll('[contenteditable]').forEach(function(el) {
+          el.removeAttribute('contenteditable');
+          el.style.border = '';
+          el.style.padding = '';
+          el.style.borderRadius = '';
+          el.style.outline = '';
+          el.style.background = '';
+        });
+
+        // Strip UI overlays
+        var addedBtn = doc.querySelector('button[style*="grid-column: 1 / -1"]');
+        if (addedBtn) addedBtn.remove();
+        
+        var addedSaveBtn = doc.querySelector('.save-float');
+        if (addedSaveBtn) addedSaveBtn.remove();
+
+        var inputEl = doc.getElementById('photoFileInput');
+        if (inputEl) inputEl.remove();
+
+        fetch('/api/save-page', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            filename: filename,
+            html: '<!DOCTYPE html>\n' + doc.documentElement.outerHTML
+          })
+        })
+        .then(function(res) { return res.json(); })
+        .then(function(data) {
+          if (data.success) {
+            saveBtn.style.background = '#1ea952';
+            saveBtn.querySelector('span').textContent = 'Saved to Files!';
+            setTimeout(function() {
+              window.location.reload();
+            }, 1000);
+          } else {
+            alert('Error: ' + data.error);
+            saveBtn.style.background = 'var(--maroon-900)';
+            saveBtn.querySelector('span').textContent = 'Save Category Page';
+          }
+        })
+        .catch(function(err) {
+          alert('Error: ' + err.message);
+          saveBtn.style.background = 'var(--maroon-900)';
+          saveBtn.querySelector('span').textContent = 'Save Category Page';
+        });
+      });
+      document.body.appendChild(saveBtn);
+    }
+  })();
+</script>
+
+</body>
+</html>

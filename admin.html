@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sumangali Garments — Admin Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --maroon-950: #2a080d;
+    --maroon-900: #3c0c13;
+    --gold-500: #c9a15a;
+    --gold-300: #e4ce9b;
+    --ivory-100: #fbf7ef;
+    --ivory-200: #f5edd8;
+    --ink-900: #1b1c1e;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--maroon-950);
+    color: var(--ivory-100);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+  }
+  .card {
+    background: var(--maroon-900);
+    border: 1px solid var(--gold-500);
+    border-radius: 24px;
+    width: 100%;
+    max-width: 580px;
+    padding: 48px 40px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+    text-align: center;
+  }
+  .logo {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 32px;
+  }
+  .logo svg {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 12px;
+  }
+  .logo h1 {
+    font-family: 'Fraunces', serif;
+    font-size: 2.2rem;
+    color: var(--ivory-100);
+    font-weight: 300;
+    letter-spacing: 0.05em;
+  }
+  .logo span {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.35em;
+    color: var(--gold-300);
+    margin-top: 4px;
+    font-weight: 700;
+  }
+  p.intro {
+    font-size: 0.95rem;
+    color: var(--ivory-200);
+    opacity: 0.85;
+    margin-bottom: 32px;
+    line-height: 1.6;
+  }
+  .links-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-bottom: 32px;
+  }
+  .link-btn {
+    background: rgba(251,247,239,0.06);
+    border: 1px solid rgba(228,206,155,0.25);
+    color: var(--ivory-100);
+    padding: 16px;
+    border-radius: 12px;
+    font-weight: 700;
+    text-decoration: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.2s ease;
+  }
+  .link-btn:hover {
+    background: var(--gold-500);
+    color: var(--maroon-950);
+    border-color: var(--gold-500);
+    transform: translateY(-2px);
+  }
+  .link-btn span.arrow {
+    font-size: 1.2rem;
+  }
+  .action-btn {
+    background: var(--gold-500);
+    color: var(--maroon-950);
+    border: none;
+    padding: 16px 28px;
+    border-radius: 100px;
+    font-weight: 800;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: transform 0.2s ease, background 0.2s ease;
+    width: 100%;
+  }
+  .action-btn.exit {
+    background: transparent;
+    border: 1px solid rgba(251,247,239,0.4);
+    color: var(--ivory-200);
+    margin-top: 12px;
+  }
+  .action-btn:hover {
+    transform: translateY(-2px);
+  }
+  .action-btn.exit:hover {
+    background: rgba(251,247,239,0.08);
+    color: var(--ivory-100);
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="logo">
+    <svg viewBox="0 0 24 24" fill="none">
+      <path d="M12 3c2 2 2 4 0 6-2-2-2-4 0-6Z" fill="#E4CE9B"/>
+      <path d="M12 21c-5-2-8-6-8-10 3 1 6 3 8 6 2-3 5-5 8-6 0 4-3 8-8 10Z" stroke="#E4CE9B" stroke-width="1.1"/>
+    </svg>
+    <h1>Sumangali</h1>
+    <span>Admin Dashboard</span>
+  </div>
+
+  <p class="intro">
+    Welcome! You have entered the Admin Area. Edit Mode is now <strong>active</strong>. Use the links below to open any page of the store and make live edits to photos, details, pricing, and collections.
+  </p>
+
+  <div class="links-grid">
+    <a href="index.html" class="link-btn">
+      <span>🏠 Edit Homepage &amp; Hero Banners</span>
+      <span class="arrow">→</span>
+    </a>
+    <a href="kids.html" class="link-btn">
+      <span>👶 Edit Kids Wear Collection</span>
+      <span class="arrow">→</span>
+    </a>
+    <a href="men.html" class="link-btn">
+      <span>👔 Edit Men's Wear Collection</span>
+      <span class="arrow">→</span>
+    </a>
+    <a href="women.html" class="link-btn">
+      <span>👗 Edit Ladies Wear Collection</span>
+      <span class="arrow">→</span>
+    </a>
+    <a href="baby.html" class="link-btn">
+      <span>🍼 Edit Baby Wear Collection</span>
+      <span class="arrow">→</span>
+    </a>
+  </div>
+
+  <button class="action-btn exit" onclick="exitEditMode()">Exit Admin Area (Lock Website)</button>
+</div>
+
+<script>
+  // Turn on edit mode in local storage
+  localStorage.setItem('editMode', 'true');
+  console.log('[Admin] Edit Mode activated.');
+
+  function exitEditMode() {
+    localStorage.removeItem('editMode');
+    window.location.href = 'index.html';
+  }
+</script>
+
+</body>
+</html>

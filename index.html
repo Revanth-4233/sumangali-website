@@ -2921,8 +2921,7 @@
           })
           .then(function (data) {
             var sha = data.sha;
-            var utf8Bytes = new TextEncoder().encode(htmlContent);
-            var base64Content = btoa(String.fromCharCode.apply(null, utf8Bytes));
+            var base64Content = btoa(unescape(encodeURIComponent(htmlContent)));
 
             return fetch(url, {
               method: "PUT",

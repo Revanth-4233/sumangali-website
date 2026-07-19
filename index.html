@@ -1870,7 +1870,7 @@
   </style>
 </head>
 
-<body class=""><div class="admin-warning-bar" style="background: var(--maroon-900); color: var(--ivory-100); padding: 12px; text-align: center; font-size: 0.9rem; font-family: sans-serif; z-index: 99999; position: relative; border-bottom: 1.5px solid var(--gold-500);">⚠️ <strong>Admin Edit Mode Active</strong> · Click any text or upload badges to make live edits · <a href="#" id="adminExitLink" style="color:var(--gold-300); margin-left:15px; text-decoration:underline; font-weight:bold;">Exit Admin Mode</a></div>
+<body class=""><div class="admin-warning-bar" style="background: var(--maroon-900); color: var(--ivory-100); padding: 12px; text-align: center; font-size: 0.9rem; font-family: sans-serif; z-index: 99999; position: relative; border-bottom: 1.5px solid var(--gold-500);">⚠️ <strong>Admin Edit Mode Active</strong> · Click any text or upload badges to make live edits · <a href="#" id="adminExitLink" style="color:var(--gold-300); margin-left:15px; text-decoration:underline; font-weight:bold;">Exit Admin Mode</a></div><div class="admin-warning-bar" style="background: var(--maroon-900); color: var(--ivory-100); padding: 12px; text-align: center; font-size: 0.9rem; font-family: sans-serif; z-index: 99999; position: relative; border-bottom: 1.5px solid var(--gold-500);">⚠️ <strong>Admin Edit Mode Active</strong> · Click any text or upload badges to make live edits · <a href="#" id="adminExitLink" style="color:var(--gold-300); margin-left:15px; text-decoration:underline; font-weight:bold;">Exit Admin Mode</a></div>
 
   <!-- Photos & positions configuration block. Updated automatically when saving edits. -->
   <script>
@@ -1990,8 +1990,8 @@
   </header>
 
   <section class="hero-carousel" id="heroCarousel">
-    <div class="carousel-track" id="carouselTrack" style="transform: translateX(0%);">
-      <div class="carousel-slide slide-1 active" style="position: relative;">
+    <div class="carousel-track" id="carouselTrack" style="transform: translateX(-300%);">
+      <div class="carousel-slide slide-1" style="position: relative;">
         <img class="img-fill has-photo" id="photo-hero" alt="Summer Collection Banner" src="images/banner_summer.png" style="object-position: center 50%;">
         
         <div class="slide-content">
@@ -2021,7 +2021,7 @@
           <a class="btn-primary" href="/women">Shop Ladies Wear</a>
         </div>
       <div class="edit-overlay"><button class="edit-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block; vertical-align:middle; margin-right:4px;"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1Z"></path><circle cx="12" cy="13" r="3.5"></circle></svg> Change</button><div class="reposition-control"><label style="margin-right:4px; font-size:11px;">Align:</label><input type="range" min="0" max="100"></div></div></div>
-      <div class="carousel-slide slide-4" style="position: relative;">
+      <div class="carousel-slide slide-4 active" style="position: relative;">
         <img class="img-fill" id="photo-hero-4" alt="Family Offer Banner" style="object-position: center 50%;">
         
         <div class="slide-content">
@@ -2035,10 +2035,10 @@
     <button class="carousel-arrow carousel-prev" id="carouselPrev" aria-label="Previous slide">‹</button>
     <button class="carousel-arrow carousel-next" id="carouselNext" aria-label="Next slide">›</button>
     <div class="carousel-dots" id="carouselDots">
-      <button class="c-dot active" data-slide="0" aria-label="Slide 1"></button>
+      <button class="c-dot" data-slide="0" aria-label="Slide 1"></button>
       <button class="c-dot" data-slide="1" aria-label="Slide 2"></button>
       <button class="c-dot" data-slide="2" aria-label="Slide 3"></button>
-      <button class="c-dot" data-slide="3" aria-label="Slide 4"></button>
+      <button class="c-dot active" data-slide="3" aria-label="Slide 4"></button>
     </div>
     <button class="carousel-pause" id="carouselPause" aria-label="Pause slideshow">❚❚</button>
   </section>
@@ -2142,7 +2142,7 @@
 
   <section class="categories" id="categories">
     <div class="wrap">
-      <div class="sec-head reveal">
+      <div class="sec-head reveal in-view">
         <div class="eyebrow">Shop by Family Member</div>
         <h2>Four collections, one store</h2>
         <p>Whatever the occasion — daily wear, festive dressing, or a special function — every age group finds their fit

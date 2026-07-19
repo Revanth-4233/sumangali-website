@@ -418,28 +418,48 @@
         currentTargetImg.style.opacity = '0.5';
         var filename = currentTargetImg.id + '_' + file.name.replace(/[^a-zA-Z0-9.-]/g, '_');
 
-        fetch('/api/upload?filename=' + encodeURIComponent(filename), {
-          method: 'POST',
-          headers: {
-            'Content-Type': file.type,
-            'X-Filename': filename
-          },
-          body: file
-        })
-        .then(function(res) { return res.json(); })
-        .then(function(data) {
-          currentTargetImg.style.opacity = '1';
-          if (data.success) {
-            currentTargetImg.src = '/' + data.url;
+      var isLocalServer = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+
+      // Handle raw file upload callback
+      fileInput.addEventListener('change', function() {
+        var file = this.files && this.files[0];
+        if(!file || !currentTargetImg) return;
+
+        currentTargetImg.style.opacity = '0.5';
+        var filename = currentTargetImg.id + '_' + file.name.replace(/[^a-zA-Z0-9.-]/g, '_');
+
+        if (isLocalServer) {
+          fetch('/api/upload?filename=' + encodeURIComponent(filename), {
+            method: 'POST',
+            headers: {
+              'Content-Type': file.type,
+              'X-Filename': filename
+            },
+            body: file
+          })
+          .then(function(res) { return res.json(); })
+          .then(function(data) {
+            currentTargetImg.style.opacity = '1';
+            if (data.success) {
+              currentTargetImg.src = '/' + data.url;
+              currentTargetImg.classList.add('has-photo');
+            } else {
+              alert('Upload failed: ' + data.error);
+            }
+          })
+          .catch(function(err) {
+            currentTargetImg.style.opacity = '1';
+            alert('Upload failed: ' + err.message);
+          });
+        } else {
+          var reader = new FileReader();
+          reader.onload = function(ev) {
+            currentTargetImg.style.opacity = '1';
+            currentTargetImg.src = ev.target.result;
             currentTargetImg.classList.add('has-photo');
-          } else {
-            alert('Upload failed: ' + data.error);
-          }
-        })
-        .catch(function(err) {
-          currentTargetImg.style.opacity = '1';
-          alert('Upload failed: ' + err.message);
-        });
+          };
+          reader.readAsDataURL(file);
+        }
       });
 
       // Initialize edit badges
@@ -546,33 +566,106 @@
         var inputEl = doc.getElementById('photoFileInput');
         if (inputEl) inputEl.remove();
 
-        fetch('/api/save-page', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            filename: filename,
-            html: '<!DOCTYPE html>\n' + doc.documentElement.outerHTML
+        if (isLocalServer) {
+          fetch('/api/save-page', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              filename: filename,
+              html: '<!DOCTYPE html>\n' + doc.documentElement.outerHTML
+            })
           })
-        })
-        .then(function(res) { return res.json(); })
-        .then(function(data) {
-          if (data.success) {
-            saveBtn.style.background = '#1ea952';
-            saveBtn.querySelector('span').textContent = 'Saved to Files!';
-            setTimeout(function() {
-              window.location.reload();
-            }, 1000);
-          } else {
-            alert('Error: ' + data.error);
+          .then(function(res) { return res.json(); })
+          .then(function(data) {
+            if (data.success) {
+              saveBtn.style.background = '#1ea952';
+              saveBtn.querySelector('span').textContent = 'Saved to Files!';
+              setTimeout(function() {
+                window.location.reload();
+              }, 1000);
+            } else {
+              alert('Error: ' + data.error);
+              saveBtn.style.background = 'var(--maroon-900)';
+              saveBtn.querySelector('span').textContent = 'Save Category Page';
+            }
+          })
+          .catch(function(err) {
+            alert('Error: ' + err.message);
             saveBtn.style.background = 'var(--maroon-900)';
             saveBtn.querySelector('span').textContent = 'Save Category Page';
+          });
+        } else {
+          // GitHub API Commit flow
+          var token = localStorage.getItem('github_token');
+          if (!token) {
+            token = prompt("🔑 Enter your GitHub Personal Access Token (PAT) with 'repo' scope to save changes directly to the live Netlify site:");
+            if (!token) {
+              saveBtn.style.background = 'var(--maroon-900)';
+              saveBtn.querySelector('span').textContent = 'Save Category Page';
+              return;
+            }
+            localStorage.setItem('github_token', token);
           }
-        })
-        .catch(function(err) {
-          alert('Error: ' + err.message);
-          saveBtn.style.background = 'var(--maroon-900)';
-          saveBtn.querySelector('span').textContent = 'Save Category Page';
-        });
+
+          var owner = "Revanth-4233";
+          var repo = "sumangali-website";
+          var url = "https://api.github.com/repos/" + owner + "/" + repo + "/contents/" + filename;
+
+          fetch(url, {
+            headers: {
+              "Authorization": "token " + token,
+              "Accept": "application/vnd.github.v3+json"
+            }
+          })
+          .then(function(res) {
+            if (res.status === 401) {
+              localStorage.removeItem('github_token');
+              throw new Error("Invalid GitHub token. Please try again.");
+            }
+            return res.json();
+          })
+          .then(function(data) {
+            var sha = data.sha;
+            var htmlContent = '<!DOCTYPE html>\n' + doc.documentElement.outerHTML;
+            var utf8Bytes = new TextEncoder().encode(htmlContent);
+            var base64Content = btoa(String.fromCharCode.apply(null, utf8Bytes));
+
+            return fetch(url, {
+              method: "PUT",
+              headers: {
+                "Authorization": "token " + token,
+                "Content-Type": "application/json",
+                "Accept": "application/vnd.github.v3+json"
+              },
+              body: JSON.stringify({
+                message: "Update " + filename + " via Admin Panel",
+                content: base64Content,
+                sha: sha,
+                branch: "main"
+              })
+            });
+          })
+          .then(function(res) { return res.json(); })
+          .then(function(data) {
+            if (data.commit) {
+              saveBtn.style.background = '#1ea952';
+              saveBtn.querySelector('span').textContent = 'Committed Live!';
+              alert('Changes committed successfully to GitHub! Netlify is redeploying the site now. Please reload the page in 30 seconds.');
+              setTimeout(function() {
+                window.location.reload();
+              }, 1000);
+            } else {
+              alert('Error saving to GitHub: ' + (data.message || 'Unknown error'));
+              saveBtn.style.background = 'var(--maroon-900)';
+              saveBtn.querySelector('span').textContent = 'Save Category Page';
+            }
+          })
+          .catch(function(err) {
+            alert('Error: ' + err.message);
+            saveBtn.style.background = 'var(--maroon-900)';
+            saveBtn.querySelector('span').textContent = 'Save Category Page';
+          });
+        }
       });
       document.body.appendChild(saveBtn);
     }

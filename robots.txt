@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sumangali-shopping-mall.netlify.app/sitemap.xml
+
+# Disallow admin pages from search engines
+Disallow: /admin.html
+Disallow: /?edit
+Disallow: /*?edit*
+Disallow: /*#edit

@@ -3,7 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kids Wear Collection — Sumangali Garments</title>
+<title>Kids Clothing, School Uniforms & Party Wear in Guntakal | Sumangali Garments</title>
+<meta name="description" content="Shop kids clothing, school uniforms, ethnic wear & party dresses in Guntakal. Visit Sumangali Garments near NTR Circle for quality kids wear.">
+<meta name="keywords" content="kids wear, boys clothing, girls clothing, ethnic kurta, party dresses, school uniforms, denim, kids festive wear, Sumangali Garments, Guntakal">
+<meta name="robots" content="index, follow">
+<meta name="author" content="Sumangali Garments">
+<link rel="canonical" href="https://sumangali-shopping-mall.netlify.app/kids.html">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://sumangali-shopping-mall.netlify.app/kids.html">
+<meta property="og:title" content="Kids Clothing, School Uniforms & Party Wear in Guntakal | Sumangali Garments">
+<meta property="og:description" content="Shop kids clothing, school uniforms, ethnic wear & party dresses in Guntakal.">
+<meta property="og:image" content="images/product_kids_1.png">
+<meta property="og:locale" content="en_IN">
+<meta property="og:site_name" content="Sumangali Garments">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Kids Clothing, School Uniforms & Party Wear in Guntakal | Sumangali Garments">
+<meta name="twitter:description" content="Shop kids clothing, school uniforms, ethnic wear & party dresses in Guntakal.">
+<meta name="twitter:image" content="images/product_kids_1.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -76,7 +92,25 @@
     transition:background 0.2s ease, transform 0.2s ease;
   }
   .nav-cta:hover{background:var(--maroon-950); transform:translateY(-1px);}
-  @media (max-width:820px){ .navlinks{display:none;} }
+  /* ===== HAMBURGER ===== */
+  .hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;z-index:60;}
+  .hamburger span{display:block;width:24px;height:2.5px;background:var(--maroon-950);border-radius:2px;transition:transform 0.3s ease,opacity 0.3s ease;}
+  .hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
+  .hamburger.active span:nth-child(2){opacity:0;}
+  .hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px);}
+  .mobile-menu-overlay{display:none;position:fixed;inset:0;background:rgba(46,11,16,0.5);z-index:55;backdrop-filter:blur(4px);}
+  .mobile-menu-overlay.active{display:block;}
+  @media(max-width:820px){
+    .hamburger{display:flex;}
+    .navlinks{display:none;position:fixed;top:0;right:0;width:280px;height:100vh;background:var(--ivory-100);flex-direction:column;padding:80px 28px 32px;gap:0;z-index:56;box-shadow:-4px 0 20px rgba(46,11,16,0.2);overflow-y:auto;align-items:flex-start;}
+    .navlinks.open{display:flex;}
+    .navlinks a,.nav-dropdown>a{padding:14px 0;font-size:1rem;border-bottom:1px solid rgba(74,22,32,0.1);width:100%;}
+    .nav-cta{display:none;}
+    .mega-menu{display:none!important;position:static;opacity:1;transform:none;box-shadow:none;border-radius:0;padding:0;width:100%;}
+    .mega-col{padding:8px 0;}
+    .mega-col h4{margin-bottom:4px;font-size:0.8rem;}
+    .mega-col a{padding:6px 0;font-size:0.88rem;}
+  }
 
   /* ===== MEGA MENU ===== */
   .nav-dropdown{position:relative;}
@@ -230,6 +264,9 @@
       </div>
       <div class="brandname">Sumangali<span>Family Shopping Mall</span></div>
     </div>
+    <button class="hamburger" id="hamburgerBtn" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     <nav class="navlinks">
       <a href="index.html">Home</a>
       <div class="nav-dropdown">
@@ -275,6 +312,7 @@
       Visit on Instagram
     </a>
   </div>
+  <div class="mobile-menu-overlay" id="mobileOverlay"></div>
 </header>
 
 <section class="category-hero">
@@ -411,6 +449,19 @@
 </a>
 
 <script>
+// Mobile hamburger menu
+(function(){
+  var hamburger=document.getElementById('hamburgerBtn');
+  var navlinks=document.querySelector('.navlinks');
+  var overlay=document.getElementById('mobileOverlay');
+  if(!hamburger||!navlinks)return;
+  function closeMenu(){hamburger.classList.remove('active');hamburger.setAttribute('aria-expanded','false');navlinks.classList.remove('open');if(overlay)overlay.classList.remove('active');document.body.style.overflow='';}
+  function openMenu(){hamburger.classList.add('active');hamburger.setAttribute('aria-expanded','true');navlinks.classList.add('open');if(overlay)overlay.classList.add('active');document.body.style.overflow='hidden';}
+  hamburger.addEventListener('click',function(){if(navlinks.classList.contains('open'))closeMenu();else openMenu();});
+  if(overlay)overlay.addEventListener('click',closeMenu);
+  navlinks.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){setTimeout(closeMenu,100);});});
+})();
+
   function orderProduct(name) {
     var text = "Hi Sumangali Garments, I would like to order: " + name;
     var url = "https://wa.me/919849860670?text=" + encodeURIComponent(text);
@@ -500,20 +551,17 @@
 
       var currentTargetImg = null;
 
-      function bindEditBadges() {
-        document.querySelectorAll('.edit-badge').forEach(function(badge) {
-          // Clone to prevent double event listeners
-          var newBadge = badge.cloneNode(true);
-          badge.parentNode.replaceChild(newBadge, badge);
-          
-          newBadge.addEventListener('click', function(e) {
-            e.stopPropagation();
-            var targetId = newBadge.dataset.target;
-            currentTargetImg = document.getElementById(targetId);
-            fileInput.click();
-          });
-        });
-      }
+      // Delegate edit-badge clicks — no clone/replace needed
+      document.addEventListener('click', function(e) {
+        var badge = e.target.closest('.edit-badge');
+        if (!badge) return;
+        e.stopPropagation();
+        var targetId = badge.getAttribute('data-target');
+        if (targetId) {
+          currentTargetImg = document.getElementById(targetId);
+          fileInput.click();
+        }
+      });
 
       var isLocalServer = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
 
@@ -559,9 +607,6 @@
         }
       });
 
-      // Initialize edit badges
-      bindEditBadges();
-
       // 2. Make product cards text contenteditable (Name and Description only)
       document.querySelectorAll('.product-card h3, .product-card .desc').forEach(function(el) {
         el.setAttribute('contenteditable', 'true');
@@ -605,7 +650,6 @@
             </div>
           `;
           grid.appendChild(card);
-          bindEditBadges();
         });
         grid.parentNode.insertBefore(addBtn, grid);
       }

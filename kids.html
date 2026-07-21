@@ -20,8 +20,11 @@
 <meta name="twitter:title" content="Kids Clothing, School Uniforms & Party Wear in Guntakal | Sumangali Garments">
 <meta name="twitter:description" content="Shop kids clothing, school uniforms, ethnic wear & party dresses in Guntakal.">
 <meta name="twitter:image" content="images/product_kids_1.png">
+<link rel="preload" as="image" href="images/product_kids_1.png" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
 <style>
   :root{
     --maroon-950:#2E0B10;
@@ -252,7 +255,79 @@
   .edit-badge svg{width:16px; height:16px; stroke:var(--ivory-100);}
   body.edit-mode .edit-badge{display:flex;}
   body.edit-mode .edit-badge:hover{transform:scale(1.1); background:var(--maroon-950);}
+.breadcrumb{max-width:1180px;margin:0 auto;padding:12px 32px 0;font-size:0.82rem;color:var(--ink-600);}
+.breadcrumb ol{display:flex;gap:8px;list-style:none;align-items:center;}
+.breadcrumb li:not(:last-child):after{content:'/';margin-left:8px;color:var(--gold-500);font-size:0.75rem;}
+.breadcrumb a{color:var(--maroon-800);font-weight:600;}
+.breadcrumb a:hover{color:var(--maroon-950);text-decoration:underline;}
+.breadcrumb [aria-current]{color:var(--ink-600);font-weight:500;}
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://sumangali-shopping-mall.netlify.app/"},
+    {"@type": "ListItem", "position": 2, "name": "Kids Wear", "item": "https://sumangali-shopping-mall.netlify.app/kids.html"}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@type": "Product",
+        "name": "Boys Ethnic Kurta Pyjama Set",
+        "description": "Vibrant gold & maroon festive kurta set, comfortable cotton blend for kids.",
+        "image": "https://sumangali-shopping-mall.netlify.app/images/product_kids_1.png",
+        "brand": {"@type": "Brand", "name": "Sumangali Garments"},
+        "offers": {"@type": "Offer", "price": "599", "priceCurrency": "INR", "availability": "https://schema.org/InStock"}
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "item": {
+        "@type": "Product",
+        "name": "Girls Floral Party Frock",
+        "description": "Beautiful floral printed party frock for girls, light and airy fabric for all-day comfort.",
+        "image": "https://sumangali-shopping-mall.netlify.app/images/product_kids_2.png",
+        "brand": {"@type": "Brand", "name": "Sumangali Garments"},
+        "offers": {"@type": "Offer", "price": "799", "priceCurrency": "INR", "availability": "https://schema.org/InStock"}
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "item": {
+        "@type": "Product",
+        "name": "Premium School Uniform Set",
+        "description": "Durable and comfortable school uniform set, perfect for daily wear.",
+        "image": "https://sumangali-shopping-mall.netlify.app/images/product_kids_3.png",
+        "brand": {"@type": "Brand", "name": "Sumangali Garments"},
+        "offers": {"@type": "Offer", "price": "499", "priceCurrency": "INR", "availability": "https://schema.org/InStock"}
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "item": {
+        "@type": "Product",
+        "name": "Kids Denim Jacket & Jeans Set",
+        "description": "Trendy denim jacket and jeans combo set for kids, stylish and durable.",
+        "image": "https://sumangali-shopping-mall.netlify.app/images/product_kids_4.png",
+        "brand": {"@type": "Brand", "name": "Sumangali Garments"},
+        "offers": {"@type": "Offer", "price": "899", "priceCurrency": "INR", "availability": "https://schema.org/InStock"}
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -314,6 +389,13 @@
   </div>
   <div class="mobile-menu-overlay" id="mobileOverlay"></div>
 </header>
+
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <ol>
+    <li><a href="index.html">Home</a></li>
+    <li><span aria-current="page">Kids Wear</span></li>
+  </ol>
+</nav>
 
 <section class="category-hero">
   <h1>Kids Wear Collection</h1>
